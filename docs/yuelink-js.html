@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<link rel="stylesheet" type="text/css" href="docs.css" >
+
+<title>yuelink-JS</title>
+
+</head>
+
+<body>
+<div class="wrapper1024">
+	<div class="ui-clear"></div>
+	<div id="header">
+		<h1>yuelink-JS</h1>
+		<p class="dui-note">yuelink 前端JS部分。</p>
+		<p class="dui-note">参阅<a href="yuelink-htmlcss。html">HTML和CSS</a>部分</p>
+	</div>
+	<div id="nav">
+		<ul>
+			<li><a href="#yuelinkJS">概述</a></li>
+				<ul>
+					<li><a href="#initialize">初始化</a></li>
+				</ul>
+			<li><a href="#architecture">结构</a></li>
+				<ul>
+					<li><a href="#namespace">命名</a></li>
+					<li><a href="#objects">核心对象</a></li>
+				</ul>
+			<li class="spacer"></li>
+			<li><a href="#yueConsole">主控制台</a></li>
+			<li><a href="#player">播放器</a></li>
+			<li><a href="#wall">图片墙</a></li>
+			<li><a href="#menu">菜单</a></li>
+			<li><a href="#dialog">对话框</a></li>
+				<ul>
+					<li><a href="#sDetail">歌曲详情对话框</a></li>
+					<li><a href="#review">评审对话框</a></li>
+					<li><a href="#newSong">上传歌曲对话框</a></li>
+					<li><a href="#activity">创建活动对话框</a></li>
+					<li><a href="#userInfo">用户信息对话框</a></li>
+				</ul>
+			<li><a href="#liteCom">轻量对话框</a></li>
+				<ul>
+					<li><a href="#heart">加心和评论</a></li>
+					<li><a href="#share">分享</a></li>
+				</ul>
+			<li><a href="#notifier">消息提示框</a></li>
+			<li class="spacer"></li>
+			<li><a href="#additional">附加函数和常量</a></li>
+		</ul>
+	</div>
+
+	<div id="footer">
+		<p>Van&nbsp;&bull;&nbsp;May., 2012</p>
+		<p><a href="mailto:vangf23@gmail.com">vangf23@gmail.com</a></p>
+	</div>
+
+
+	<div id="content" class="dui-reading">
+	<section id="yuelinkJS">
+		<h1>yueLink JS</h1>
+		<h2>概述</h2>
+		<p><code><strong>yuelink.js</strong></code>对对象进行了抽象封装，可以通过调用诸如<code>yueConsole.showPlayer()</code>等方式控制页面行为。</p>
+		<h4>需配合使用的库</h4>
+		<ul>
+			<li><code>jquery-1.7.1.min.js</code>及以上版本</li>
+			<li><code>jquery.tmpl.js</code> 用于DOM对象生成和渲染</li>
+			<li><code>jquery.masonry.min.js</code> 图片墙排列
+				<br/><span class="dui-note">需拷贝<code>cornerStamp</code>相关代码，而非原始的js包。
+					原资料：<a href="http://masonry.desandro.com" target="_blank">http://masonry.desandro.com</a>
+				</span>
+			</li>
+		</ul>
+		
+		<h3 id="initialize">初始化</h3>
+		<p>为编写简单，抽象对象及方法直接在yuelink.js中进行定义，即当该js文件被载入时即运行。但其中DOM对象变量的定义及初始化操作必须在页面加载完成后再执行。因此在载入yuelink.js后，必须调用函数<code>yuelink_initialize()</code>对DOM对象变量进行初始化，并绑定事件。</p>
+		<pre class="code js">
+$(document).ready(function(){
+	<em>yuelink_initialize();</em>
+});		
+		</pre>
+	
+	</section>
+	
+	<section id="architecture">
+		<h2>结构</h2>
+		<p>yueLink对操作对象和行为进行了封装。封装分为四层：操作对象层、数据层、DOM对象层和DOM模板。</p>
+		<dl>
+			<dt>抽象对象层</dt>
+			<dd>将控制台（console）、播放器（player）、图片墙（wall）等封装为对象，以管理数据和行为。操作对象与DOM对象有一定的对应关系。一个操作对象可能操作多个DOM对象或多个其它操作对象。</dd>
+			<dd>抽象对象是最主要操作的对象，通过调用作为属性的方法来操作界面行为。除用以获取特定对象或属性的方法外，抽象对象的方法都将返回本身，以便作链式调用。</dd>
+			<dt>数据层</dt>
+			<dd>数据以json格式从后台获取，部分数据获取后仍保留在浏览器环境，以供快速调用。这些数据保存在<code>d_</code>开头的变量中，通常以json格式保存。</dd>
+			<dt>DOM对象层</dt>
+			<dd>一些常用DOM对象以jQuery对象的方式存储于以<code>$</code>开头的变量中。但一般用于操作对象层的使用，而不单独使用。</dd>
+			<dt>DOM模板</dt>
+			<dd>从数据转换为DOM元素，采用模板渲染方式。模板使用<code>jquery.tmpl.js</code>。</dd>
+		</dl>
+		
+		<h3 id="namespace">命名</h3>
+		<p>对象在HTML, CSS及JS中，都尽量使用相同的名称（id）。在HTML中，为了避免常用词冲突，在名称后会加类型后缀。</p>
+		<p>在DOM对象层，由于使用的对象用jQuery对象表示，故添加前缀<code>$</code>，如<code>$console</code>表示主控制台的jQuery对象。</p>
+		<p>一般直接使用对象的名称作为变量名。个别名称与系统变量冲突的，或者表意不明的，会加前缀或后缀。如主控制台加前缀<code><em>yue</em>Console</code>；菜单DOM对象加后缀<code>Menu</code>以区分于触发链接。</p>
+		<p>数据层使用前缀<code>d_</code>表明为数据对象。</p>
+
+		<h3 id="objects">核心对象</h3>
+		<table class="data">
+		<thead>
+			<tr><th>对象</th><th>DOM元素</th><th>DOM对象变量</th><th>抽象对象变量</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>主控制台</td><td>#console</td><td>$console</td><td><a href="#yueConsole">yueConsole</a></td></tr>
+			<tr><td>播放器图片部分</td><td>#player</td><td>$player</td><td><a href="#player">player</a></td></tr>
+			<tr><td>播放器控制部分</td><td>#playCtrl</td><td>$playCtrl</td><td><a href="#player">player</a></td></tr>
+			<tr><td>图片墙</td><td>#wall</td><td>$wall</td><td><a href="#wall">wall</a></td></tr>
+			<tr><td>图片墙内容器
+				<br/><span class="dui-note">直接布局图片的容器对象</span></td>
+				<td>#wall .innerWrapper</td><td>$wallWrapper</td><td><a href="#wall">wall</a></td>
+			</tr>
+			<tr><td>菜单</td>
+				<td>#startMenu <span class="dui-note">a#start</span>
+					<br/>#searchMenu <span class="dui-note">a#search</span>
+					<br/>#fmMenu <span class="dui-note">a#fm</span>
+					<br/>#msgMenu <span class="dui-note">a#msg</span>
+					<br/>#userMenu <span class="dui-note">a#user</span>
+					<br/>#songInfo
+				</td>
+				<td>$startMenu
+					<br/>$searchMenu
+					<br/>$fmMenu
+					<br/>$msgMenu
+					<br/>$userMenu
+					<br/>$songInfo
+				</td>
+				<td><a href="#menu">menu</a></td>
+			</tr>
+			<tr><td>对话框控制器</td><td>#dialog</td><td>$dialog</td><td><a href="#dialog">dialog</a></td></tr>
+			<tr><td>歌曲详情对话框</td><td>#dialog #songDetail</td><td>$sDetail</td><td><a href="#detail">sDetail</a></td></tr>
+			<tr><td>评审对话框</td><td>#dialog #review</td><td>$review</td><td><a href="#review">review</a></td></tr>
+			<tr><td>上传歌曲对话框</td><td>#dialog #newSong</td><td>$newSong</td><td><a href="#newSong">newSong</a></td></tr>
+			<tr><td>创建活动对话框</td><td>#dialog #activity</td><td>$activity</td><td><a href="#activity">activity</a></td></tr>
+			<tr><td>用户信息对话框</td><td>#dialog #userInfo</td><td>$userInfo</td><td><a href="#userInfo">userInfo</a></td></tr>
+		</tbody>
+		</table>
+	
+	</section>
+	
+	<section id="yueConsole">
+		<h1>主控制台<code>yueConsole</code></h1>
+		<p>控制yuelink的播放和图片墙显示状态。</p>
+		<h4>调用</h4>
+		<p>调用对象属性，如展示图片墙，调用<code>yueConsole.showWall()</code></p>
+		<h4>属性</h4>
+		<dl>
+			<dt><code>isPlayer</code></dt>
+			<dd>当前显示为播放器视图（<code>true</code>）还是图片墙视图（<code>false</code>）</dd>
+			
+			<dt><code>settings</code></dt>
+			<dd>NA</dd>
+		</dl>
+		<h4>方法</h4>
+		<dl>
+			<dt><code>showPlayer ( [para] )</code></dt>
+			<dd>展示播放器图片。带参数<code>para</code>则同时控制播放器更换播放由<code>para</code>指定的歌曲。</dd>
+			
+			<dt><code>showWall ( [para] )</code></dt>
+			<dd>展示图片墙。带参数<code>para</code>则同时刷新图片墙内容为<code>para</code>指定的节点信息。</dd>
+			
+			<dt><code>switchView ( [option] [, para] )</code></dt>
+			<dd>切换播放器视图。</dd>
+			<dd>可用参数<code>option</code>指定切换的模式为播放器视图（<code>'player'</code>）或图片墙视图（<code>'wall'</code>）。
+				可同时使用<code>para</code>参数指定切换视图后播放器或图片墙所需载入的信息。
+			</dd>
+			<dd class="dui-note">使用<code>option, para</code>参数的效果与直接调用<code>showPlayer(para)</code>或<code>showWall(para)</code>一致。</dd>
+			
+			<dt><code>adjustPosition ()</code></dt>
+			<dd>调整控制台的显示位置，当处于播放器视图时，根据浏览器高度重置其位置，初始化在窗口尺寸变更时调用。</dd>
+			
+			<dt><code>getTopPos ()</code></dt>
+			<dd>获取播放器视图时控制台显示位置的参数。返回数值</dd>
+		</dl>
+	</section>
+	
+	<section id="player">
+		<h1>播放器<code>player</code></h1>
+		<h4>属性</h4>
+		<dl>
+			<dt><code>isPlaying</code>, <code>isPaused</code></dt>
+			<dd>获得播放状态信息。</dd>
+			
+			<dt><code>song</code></dt>
+			<dd>当前播放（或暂停时）的歌曲信息。为json对象格式，包含歌曲的基本信息。</dd>
+			<dd class="dui-note code">id, title, author, level, heart, thumb（缩略图地址）, poster（大图地址）</dd>
+			<dd class="dui-note"><span class="dui-alert">*</span>该信息格式与图片墙中的歌曲信息一致。</dd>
+			
+		</dl>
+		<h4>方法</h4>
+		<dl>
+			<dt><code>play ( [para] )</code></dt>
+			<dd>开始播放音乐。无参数情况下，继续播放被暂停的音乐。</dd>
+			<dd>使用参数<code>para</code>指定播放新的歌曲。使用参数<code>para = 'restart'</code>重新播放当前歌曲。</dd>
+			
+			<dt><code>pause ()</code></dt>
+			<dd>暂停当前正在播放的音乐。</dd>
+			
+			<dt><code>prev ()</code>, <code>next ()</code></dt>
+			<dd>?</dd>
+		</dl>
+	</section>
+	
+	<section id="wall">
+		<h1>图片墙<code>wall</code></h1>
+		<h4>属性</h4>
+		<dl>
+			<dt><code>node</code></dt>
+			<dd>当前节点的基本信息 ?</dd>
+		</dl>
+		<h4>方法</h4>
+		<dl>
+			<dt><code>loadInfo ( options )</code></dt>
+			<dd>根据<code>options</code>参数的信息载入节点数据，并刷新显示。</dd>
+			<dd class="dui-note"><p><code>options</code>可用属性：</p></dd>
+			
+			<dt><code>clean ()</code></dt>
+			<dd>清理图片墙中的数据。在<code>loadInfo()</code>中被调用。</dd>
+		</dl>
+	</section>
+	
+	<section id="menu">
+		<h1>菜单<code>menu</code></h1>
+		<p>统一管理控制台上6个菜单的显示和隐藏：歌曲简要信息、开始菜单、搜索菜单、FM频道菜单、消息菜单和用户信息菜单。</p>
+		<h4>属性</h4>
+		<dl>
+			<dt><code>mapping</code></dt>
+			<dd>菜单名称与DOM对象的映射表</dd>
+			<dd class="dui-note code">mapping : { 'menu_name' : DOM_Object }</dd>
+			
+			<dt><code>log</code></dt>
+			<dd>菜单显示属性索引。</dd>
+			<dd><code>dependent</code>中的菜单同时只能显示一个；<code>independent</code>中的菜单可随意显示。</dd>
+			<dd class="dui-note code">log : { 'independent' : array(menu_name), 'dependent' : array(menu_name) }</dd>
+		</dl>
+		<h4>方法</h4>
+		<dl>
+			<dt><code>show ( para )</code></dt>
+			<dd>显示由参数<code>para</code>指定的菜单，并隐藏相关的菜单。</dd>
+			<dl class="dui-note">
+				<dt><code>para</code></dt>
+				<dd>字符串表示的菜单名称，<code>mapping</code>和<code>log</code>中的<code>menu_name</code></dd>
+				<dd>取值：<code>'songInfo', 'start', 'search', 'fm', 'msg', 'user'</code></dd>
+			</dl>
+			
+			<dt><code>hide ( para )</code></dt>
+			<dd>隐藏由参数<code>para</code>指定的菜单。<code>para = 'all'</code>则隐藏全部菜单。</dd>
+			
+			<dt><code>toggle ( para )</code></dt>
+			<dd>改变由参数<code>para</code>指定的菜单的显隐：若已显示则隐藏；反之则显示。调用<code>show(para)</code>和<code>hide(para)</code>方法。</dd>
+			
+			<dt><code>showSingleMenu ( para )</code>, <code>hideSingleMenu ( para )</code></dt>
+			<dd>显示和隐藏单个菜单。在<code>show(para)</code>和<code>hide(para)</code>中调用。</dd>
+			
+			<dt><code>adjustPosition ()</code></dt>
+			<dd>根据播放器视图或图片墙视图调整所有菜单的显示位置。默认在窗口尺寸变更和视图切换时调用。</dd>
+			
+			<dt><code>getTopPos ( para )</code></dt>
+			<dd>获得由参数<code>para</code>指定的菜单的顶部显示位置数值。默认在菜单显示隐藏和位置调整中调用。</dd>
+			<dd><code>para</code>可为菜单名称字符串，或直接的菜单对象。</dd>
+		</dl>
+		
+	</section>
+	
+	<section id="dialog">
+		<h1>对话框<code>dialog</code></h1>
+		
+		
+	</section>
+	
+	<section id="additional">
+		<h1>附加函数和常量</h1>
+		<p>附加函数和常量统一作为<code>_</code>对象的属性存在。</p>
+		<p>附加函数和常量是工具性的，用于简化代码（如操作cookie、查询数组等）和加强代码可读性。可以按需添加函数，但不应与yuelink的结构耦合。</p>
+		<dl>
+			<dt><code>key</code>常量</dt>
+			<dd>常用操作按键的keyCode图谱，使用大写，如：<code>_.key.ESCAPE</code>, <code>_.key.PAGE_UP</code>, <code>_.key.RIGHT</code>, <code>_.key.COMMA</code>等。</dd>
+			<dd>部分键值有多个名称，如<code>_.key.ESCAPE</code>及<code>_.key.ESC</code>等</dd>
+			<dd class="dui-note code">BACKSPACE, TAB, ENTER, ESCAPE / ESC, SPACE, PAGE_UP, PAGE_DOWN, END, HOME, LEFT, UP, RIGHT, DOWN, NUMPAD_ENTER, COMMA, INPUT</dd>
+		
+			<dt><code>inArray ( item, arr )</code></dt>
+			<dd>判断一个元素<code>item</code>是否在数组对象<code>arr</code>中。</dd>
+			<dd>返回<code>true</code>或<code>false</code></dd>
+			
+			<dt><code>arrIndexOf ( arr, item )</code></dt>
+			<dd>返回一个元素<code>item</code>在数组对象<code>arr</code>中的索引位置。</dd>
+			<dd>返回数字索引。当元素不存在于数组中或参数错误时，返回<code>-1</code></dd>
+			<dd class="dui-note"><code>arr</code>和<code>item</code>的顺序由变量名的句子结构决定。</dd>
+			
+			<dt><code>cookie ( key, value, options )</code></dt>
+			<dd>操作cookie。<code>key</code>为cookie变量，<code>value</code>为其值；<code>options</code>为其它参数对象，包括<code>expires</code>, <code>raw</code>, <code>path</code>, <code>domain</code>, <code>secure</code>等。</dd>
+			<dd class="dui-note">由 Klaus Hartl 编写的<strong>jQuery Cookie Plugin</strong>改写，原资料： <a href="https://github.com/carhartl/jquery-cookie" target="_blank">https://github.com/carhartl/jquery-cookie</a></dd>
+			
+			
+		</dl>
+		
+	</section>
+	
+	<section id="supersized">
+		<h1>yuelink.Supersized</h1>
+		<p>为满足播放器使用的需要，对supersized进行了几项重要的改动：</p>
+		<ol>
+			<li>增加补充增加图片及歌曲信息的接口<code>api.appendSongs</code></li>
+			<li>增加在指定位置插入图片及歌曲信息并跳转到相应图片的接口<code>api.jumpInsertSong</code></li>
+			<li>删除了创建<code>#supersized-loader</code>的过程</li>
+			<li>修改了载入初期的行为：先隐藏内容容器<code>#supersized</code>，待其中图片载入完成再淡入</li>
+		</ol>
+	</section>
+	
+	</div>
+	
+</div>
+
+</body>
+
+<script type="text/javascript">
+</script>
+
+</html>

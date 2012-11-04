@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="images/icons.css" />
+<title>yuelink</title>
+</head>
+
+<body>
+
+<div id="console" class="strip-blank">
+	<div id="yuelink"></div>
+	<div class="innerWrapper">
+		<div id="playCtrl">
+			<div id="playCtrl-box">
+				<a id="playCtrl-button" title="播放/暂停">
+					<div class='pause'></div>
+				</a>
+			</div>
+			<!--a id="playCtrl-heart" title="加心"><span class="icon icon-heart">心</span></a-->
+			<a id="playCtrl-cycle" title="单曲循环"><div class="uncycle"></div></a>
+			<h2 style='font-weight: normal;'></h2>
+			<div id="playCtrl-bar">
+				<div class="prog-blank"></div>
+				<div class="prog-load"></div>
+				<div class="prog-white"></div>
+				<div class="prog-cover"></div>
+			</div>
+			<div id="playCtrl-time"><span class="position">0:00</span> / <span class="duration">0:00</span></div>
+			<div id="playCtrl-volume">
+				<div class="volumn-white"></div>
+				<div class="volumn"></div>
+			</div>
+			<div class="speaker-white"></div>
+			
+		</div>
+		<div id="userBox">
+			<div id="userNote">你好<a id="user">天地一沙鸥</a></div>
+			<ul id="nav">
+				<li><a id="start"></a></li>
+				<li><a id="search"></a></li>
+				<li><a id="fm"></a></li>
+				<li><a id="msg"></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="player">
+	<div id="showcase">
+		<div id="sinfo">
+			<div id="info" class="gray-square">
+			</div>
+			<div id="lyrics" class="gray-rectangle">
+			</div>
+		</div>
+		<a id="list">
+			<div class='list-gray'></div>
+		</a>
+		<a id="star">
+			<div class='star-gray'></div>
+		</a>
+	</div>
+	<div id="posterHolder"><ul id="posters"></ul></div>
+	<div id="prev"><a class='prev'></a></div>
+	<div id="next"><a class='next'></a></div>	
+</div>
+
+<div id="wall" class="wall">
+	<div class="innerWrapper" style="height:800px;">
+		<div id="nodeInfo"">
+			<div id="nodeInfo-masthead">
+				<ul id="nodeInfo-masthead-ctrl">
+					<li class="current"><a></a></li>
+					<li><a></a></li>
+					<li><a></a></li>
+				</ul>
+				<div class="demograph">
+					<img class="photo" src="sample/photo-nut.jpg" />
+					<h1>胡桃夹子<span class="nickname">（阿夹）</span></h1>
+					<p>拥有<span class="hasHeart">24356</span></p>
+					<p class="brief">经营好一个咖啡店是立身之本，唱歌配音与后期只是业余爱好</p>
+				</div>
+				
+			</div>
+			<div id="nodeInfo-grid">
+				<p id="nodeInfo-intro">节点简介：吉他又译为结它或六弦琴。属于弹拨乐器</p>
+				<ul id="nodeInfo-data">
+					<li class="userLevel">用户等级：<span class="num">3</span></li>
+					<li class="songCount">拥有<span class="num">24</span></li>
+					<li class="fansCount">粉丝<span class="num">10084</span></li>
+					<li class="rollUp"><a class="disabled"></a></li>
+					<li class="rollDown"><a></a></li>
+				</ul>
+				<ul id="nodeInfo-thumbs">
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+					<li><a><img /></a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="brick" style="top:0; left:0px; ">
+			<div class="brick-header">
+				<img class="epCover" src="sample/epCover-eason.jpg" />
+				<div class="shade">
+					<div class="share"><a>分享</a></div>
+					<div class="more"><a>更多</a></div>
+					<a class="playThis"></a>
+				</div>
+			</div>
+		
+			<h1>好久不见 - 陈奕迅</h1>
+			<div class="level">4</div>
+			<div class="heart">44078</div>
+		
+			<ul class="brick-comment">
+				<li>
+					<img class="photo" src="sample/photo-strawberry.jpg" />
+					<p class="text"><span class="name">strawberry</span>
+						That looks amazing! <span class="at">@apple</span>
+					</p>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="brick" style="top:0; left:245px; ">
+			<div class="brick-header">
+				<img class="epCover" src="sample/epCover-pg.jpg" />
+				<div class="shade">
+					<div class="share"><a>分享</a></div>
+					<div class="more"><a>更多</a></div>
+					<a class="playThis"></a>
+				</div>
+			</div>
+			
+			<h1>无可救药- 品冠</h1>
+			<div class="level">1</div>
+			<div class="heart">15007</div>
+			
+			<ul class="brick-comment">
+				<li>
+					<img class="photo" src="sample/photo-butterfly.jpg" />
+					<p class="text"><span class="name">月光蝶</span>
+						nice...
+					</p>
+				</li>
+				<li>
+					<img class="photo" src="sample/photo-redhat.jpg" />
+					<p class="text"><span class="name">小红帽</span>
+						很好听！！
+					</p>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="brick" style="top:342px; left:490px; ">
+			<div class="brick-header">
+				<img class="epCover" src="sample/epCover-pg.jpg" />
+				<div class="shade">
+					<div class="share"><a>分享</a></div>
+					<div class="more"><a>更多</a></div>
+					<a class="playThis"></a>
+				</div>
+			</div>
+			
+			<h1>无可救药- 品冠</h1>
+			<div class="level">1</div>
+			<div class="heart">15007</div>
+			
+			<ul class="brick-comment">
+				<li>
+					<img class="photo" src="sample/photo-butterfly.jpg" />
+					<p class="text"><span class="name">月光蝶</span>
+						nice...
+					</p>
+				</li>
+				<li>
+					<img class="photo" src="sample/photo-redhat.jpg" />
+					<p class="text"><span class="name">小红帽</span>
+						很好听！！
+					</p>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+</div>
+
+<div id="register" class="wall">
+</div>
+
+<div id="menu" class="innerWrapper">
+	<div id="songInfo" class="menu-body">
+		歌曲信息
+	</div>
+	<div id="startMenu" class="menu-body">
+		卡似乎
+	</div>
+	<div id="searchMenu" class="menu-body">
+		搜索
+	</div>
+	<div id="fmMenu" class="menu-body">
+		FM
+	</div>
+	<div id="msgMenu" class="menu-body">
+		消息
+	</div>
+	<div id="userMenu" class="menu-body">
+		用户
+	</div>
+</div>
+
+<div id="dialog" style="display:none;">
+	<div id="songDetail"class="dialog-body">
+		<h1><span class="icon-detail">歌曲详情</span></h1>
+		<div class="closeThis" title="关闭">x</div>
+		<div class="dialog-inner">
+			
+		</div>
+	</div>
+	
+	<div id="review" class="dialog-body"></div>
+	<div id="newSong" class="dialog-body"></div>
+	<div id="activity" class="dialog-body"></div>
+	<div id="userInfo" class="dialog-body"></div>
+	
+</div>
+
+<script id="playCtrl-title-template" type="text/html">
+<span>{{= title}} - {{= author}}</span>
+</script>
+
+<script id="poster-template" type="text/html">
+<li class="poster" song_id="{{= id}}"><img src="{{= poster}}" /></li>
+</script>
+
+<script id="nodeInfo-demograph-template" type="text/html">
+<img class="photo" src="{{= photo}}" />
+<h1>{{= nodename}}<span class="nickname">（{{= nickname}}）</span></h1>
+<p>拥有<span class="hasHeart">{{= heart}}</span></p>
+<p class="brief">{{= brief}}</p>
+</script>
+
+<script id="brick-template" type="text/html">
+<div class="brick" item_id="{{= id}}">
+	<div class="brick-header">
+		<img class="epCover" src="{{= thumb}}" />
+		<div class="shade">
+			<div class="share"><a>分享</a></div>
+			<div class="more"><a>更多</a></div>
+			<a class="playThis"></a>
+		</div>
+	</div>
+	<h1>{{= title}} - {{= author}}</h1>
+	<div class="level">{{= level}}</div>
+	<div class="heart">{{= heart}}</div>
+	<ul class="brick-comment"></ul>
+</div>
+</script>
+<script id="brick-comment-template" type="text/html">
+<li>
+	<img class="photo" src="{{= photo}}" />
+	<p class="text"><span class="name">{{= username}}：</span>{{= content}}</p>
+</li>
+</script>
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/soundmanager2-nodebug-jsmin.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.masonry.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.tmpl.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/yuelink.js"></script>
+<script type="text/javascript">
+	yuelink_initialize();
+	
+	yueConsole.showPlayer();
+	wall.loadInfo();
+	
+	var soundManagerReadyCheck = setInterval(function(){
+		if (soundManagerReady) {
+			clearInterval(soundManagerReadyCheck);
+
+			player.append([
+			   			{ id: 1, title: 'Viva La Vida', author: 'Coldplay', url: 'http://yuelink-music.b0.upaiyun.com/order/034724341af9772743cc123132faac31.mp3', poster: "sample/viva-la-vida.jpg", thumb: 'sample/photo-butterfly.jpg' },
+			   			{ id: 3, title: 'Hero', author: 'Enrique Iglesias', url: 'http://yuelink-music.b0.upaiyun.com/order/783dce11a20fb6e370be184a695a9694.mp3', poster: "sample/enrique-iglesias.jpg", thumb: 'sample/photo-nut.jpg' },
+			   			{ id: 5, title: 'Love Me Tender', author: 'Elvis Presly', url: 'sample/lovemetender.mp3', poster: 'sample/love_me_tender.jpg', thumb: 'sample/photo-redhat.jpg' }
+			   		]);
+		}
+	}, 50);
+</script>
+</body>
+</html>

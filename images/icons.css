@@ -1,0 +1,74 @@
+/*
+
+        Creating a sprite from following images:
+        
+        ./icons/strip-blank.png (1280x100)
+        ./icons/gray-rectangle.png (400x220)
+        ./icons/prog-white.png (385x4)
+        ./icons/prog-blank.png (385x4)
+        ./icons/prog-load.png (385x4)
+        ./icons/o2-plan-focus.png (291x111)
+        ./icons/o2-plan.png (291x111)
+        ./icons/gray-square.png (220x220)
+        ./icons/o2-coop.png (181x111)
+        ./icons/o2-coop-focus.png (181x111)
+        ./icons/o2-record.png (135x111)
+        ./icons/o2-record-focus.png (135x111)
+        ./icons/prev-focus.png (55x109)
+        ./icons/next-focus.png (55x109)
+        ./icons/next.png (55x109)
+        ./icons/prev.png (55x109)
+        ./icons/pause.png (60x60)
+        ./icons/play.png (60x60)
+        ./icons/sqare-gray.png (60x60)
+        ./icons/shadow.png (42x42)
+        ./icons/list-gray.png (40x41)
+        ./icons/star-gray.png (40x41)
+        ./icons/list-green.png (40x40)
+        ./icons/star-blue.png (40x40)
+        ./icons/volumn-white.png (25x9)
+        ./icons/volumn.png (25x9)
+        ./icons/cycle.png (18x16)
+        ./icons/uncycle.png (18x16)
+        ./icons/prog-cover.png (6x12)
+        ./icons/speaker-white.png (8x10)
+
+        Output files:
+          ./icons.png
+          ./icons.css
+
+        Output size:
+          1280x540
+
+
+*/
+div.strip-blank { width: 1280px; height: 100px; background: url(icons.png) 0px 0px no-repeat; }
+div.gray-rectangle { width: 400px; height: 220px; background: url(icons.png) 0px -100px no-repeat; }
+div.prog-white { width: 385px; height: 4px; background: url(icons.png) -400px -100px no-repeat; }
+div.prog-blank { width: 385px; height: 4px; background: url(icons.png) -785px -100px no-repeat; }
+div.prog-load { width: 385px; height: 4px; background: url(icons.png) -400px -104px no-repeat; }
+div.o2-plan-focus { width: 291px; height: 111px; background: url(icons.png) -400px -108px no-repeat; }
+div.o2-plan { width: 291px; height: 111px; background: url(icons.png) -691px -108px no-repeat; }
+div.gray-square { width: 220px; height: 220px; background: url(icons.png) 0px -320px no-repeat; }
+div.o2-coop { width: 181px; height: 111px; background: url(icons.png) -982px -108px no-repeat; }
+div.o2-coop-focus { width: 181px; height: 111px; background: url(icons.png) -220px -320px no-repeat; }
+div.o2-record { width: 135px; height: 111px; background: url(icons.png) -401px -320px no-repeat; }
+div.o2-record-focus { width: 135px; height: 111px; background: url(icons.png) -536px -320px no-repeat; }
+a.prev-focus { width: 55px; height: 109px; background: url(icons.png) -1163px -108px no-repeat; }
+a.next-focus { width: 55px; height: 109px; background: url(icons.png) -1218px -108px no-repeat; }
+a.next { width: 55px; height: 109px; background: url(icons.png) -671px -320px no-repeat; }
+a.prev { width: 55px; height: 109px; background: url(icons.png) -726px -320px no-repeat; }
+div.pause { width: 60px; height: 60px; background: url(icons.png) -400px -219px no-repeat; }
+div.play { width: 60px; height: 60px; background: url(icons.png) -460px -219px no-repeat; }
+div.sqare-gray { width: 60px; height: 60px; background: url(icons.png) -520px -219px no-repeat; }
+div.shadow { width: 42px; height: 42px; background: url(icons.png) -580px -219px no-repeat; }
+div.list-gray { width: 40px; height: 41px; background: url(icons.png) -622px -219px no-repeat; }
+div.star-gray { width: 40px; height: 41px; background: url(icons.png) -662px -219px no-repeat; }
+div.list-green { width: 40px; height: 40px; background: url(icons.png) -702px -219px no-repeat; }
+div.star-blue { width: 40px; height: 40px; background: url(icons.png) -742px -219px no-repeat; }
+div.volumn-white { width: 25px; height: 9px; background: url(icons.png) -782px -219px no-repeat; }
+div.volumn { width: 25px; height: 9px; background: url(icons.png) -807px -219px no-repeat; }
+div.cycle { width: 18px; height: 16px; background: url(icons.png) -782px -228px no-repeat; }
+div.uncycle { width: 18px; height: 16px; background: url(icons.png) -800px -228px no-repeat; }
+div.prog-cover { width: 6px; height: 12px; background: url(icons.png) -1273px -108px no-repeat; }
+div.speaker-white { width: 8px; height: 10px; background: url(icons.png) -818px -228px no-repeat; }

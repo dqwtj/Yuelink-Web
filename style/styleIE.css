@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* patch for IE */
+
+#wall .brick .brick-header .shade {
+	background:#f90 url(images/opacity050.png);
+}
+
+#wall .brick .brick-header .share,
+	#wall .brick .brick-header .more {
+	display:none;
+}
+
+#wall { background:#f90; }

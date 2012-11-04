@@ -1,0 +1,138 @@
+@CHARSET "UTF-8";
+
+/* framework */
+html, body { height:100%; margin:0; padding:0;
+	font-family:Helvetica, Calibri, Arial, '宋体', sans-serif; 
+}
+
+.wrapper1024 { width: 920px; margin:0 auto; }
+
+a { color:#c00; }
+
+::-webkit-scrollbar { width:15px; height:15px; background-color:#fff; }
+::-webkit-scrollbar-thumb { background-color:#ccc; border:4px solid #fff; border-radius:10px; }
+::-webkit-scrollbar-thumb:hover { background-color:#bbb; }
+
+#header, #nav, #footer { float:left; position:fixed; }
+#header { top:30px; }
+#nav { top:180px; bottom:100px; width:200px; overflow-y:auto; border-top:1px solid #ccc; border-bottom:1px solid #ccc; }
+#footer { bottom:10px; font-size:9pt; color:#999; }
+
+#header, #nav, #content { font-size:11pt; }
+#content pre.code { font-size:10pt; }
+
+#nav ul { margin:0.5em 0; padding-left:1.5em; line-height:1.7em; list-style:circle; color:#777; }
+#nav ul ul { margin-top:0; font-size:10pt; line-height:1.5em; }
+#nav li.spacer { list-style:none; height:1em; }
+
+#content { margin-left: 270px; padding-top: 1px; padding-bottom:50px; color: #555; }
+#content h1, #content h2, #content h3, #content h4, #content h5, #content h6 { color:#000; }
+#content a { text-decoration:underline; }
+
+
+/* READING ---------------------------------------------------------------- */
+/* READING TEXT */
+/*	READING TEXT defines titles, paragraphs and other text content styles
+ *	it is designed for paragraphs of text to be read, rather than instructive or functional texts
+ *	REQUIRES to use .dui-reading as container/wrapper
+ */
+/* FONTS*/
+.dui, .dui-reading { font-size:10pt;
+	font-family:Helvetica, Calibri, Arial, '宋体', sans-serif;
+}
+
+.dui-sansSerif,
+.dui-reading h1, .dui-reading h2, .dui-reading h3, .dui-reading h4, .dui-reading h5,
+.dui-reading dl.intro dt
+	{ font-family:Helvetica, Calibri, Arial, '微软雅黑', sans-serif; }
+
+.dui-serif
+	{ font-family:Cambria, Georgia, Times New Roman, '宋体', serif; }
+
+.dui-reading code, .dui-reading .code, .dui-reading.code
+	{ font-family:Lucida Console, Georgia, serif; }
+
+.dui-note { font-size:9pt; color:#999; }
+.dui-alert { color:#c00; font-weight:bold; }
+
+span.dui-note, span.dui-alert { margin:0 3px; }
+
+/* STYLES */
+.dui-reading { line-height:1.5em; color:#333; }
+
+.dui-reading h1 { clear:both; border-bottom:1px solid #ccc; padding-top:30px; padding-bottom:5px; margin-top:2em; margin-bottom:15px; }
+.dui-reading h1:first-child { margin-top:0; }
+.dui-reading h1 > sub { color:#ccc; margin:0 20px; font-size:12pt; vertical-align:baseline; }
+
+.dui-reading h2 { margin-top:1.5em; margin-bottom:0.5em; }
+.dui-reading h3 { margin-top:1em; margin-bottom:0.5em; }
+
+.dui-reading h5, .dui-reading h6 { font-size:1em; margin-bottom:0.5em; }
+
+.dui-reading h1, .dui-reading h2, .dui-reading h3, .dui-reading h4 { line-height:2em; }
+
+
+.dui-reading p { margin-top:0.5em; margin-bottom:0.5em; margin-left:1em; }
+
+.dui-reading ul, .dui-reading ol,
+.dui-reading ul.code, .dui-reading ol.code { margin-left:1em; }
+
+.dui-reading dl { margin-left:1em; padding:0; overflow-y:auto; }
+.dui-reading dl dt { font-weight:bold; margin-top:0.5em; }
+.dui-reading dl dd, .dui-reading dl dd.code { margin-left:2em; }
+.dui-reading dl dd.dui-note { margin-left:3em; }
+
+.dui-reading dl.inline { margin:0.5em; margin-left:2.5em; padding:0; }
+.dui-reading dl.inline dt { float:left; margin:0; margin-right:2em; }
+
+.dui-reading dl.intro dt,
+.dui-reading dl.introCode dt { float:left; clear:both; width:200px; margin-top:0;
+	font-weight:bold; font-size:1.2em; color:#333;
+}
+.dui-reading dl.intro dd,
+.dui-reading dl.introCode dd { float:left; }
+
+.dui-reading dl.introCode dt { margin-bottom:0.7em; font-size:1em; }
+
+.dui-reading img.border { padding:5px; border:1px solid #ccc; border-radius:2px; box-shadow:1px 1px 2px #eee; }
+
+.dui-reading pre { margin:5px; padding:10px; overflow-x:auto; overflow-y:hidden;
+	background-color:#f9f9f9; border:1px solid #e5e5e5; border-radius:4px;
+	position:relative;
+}
+.dui-reading pre::-webkit-scrollbar { height:8px; width:8px; }
+.dui-reading pre::-webkit-scrollbar-thumb { background-color:#ccc;
+	border-bottom-left-radius:4px; border-bottom-right-radius:4px; }
+.dui-reading pre::-webkit-scrollbar-thumb:hover { background-color:#ddd; }
+
+.dui-reading del { opacity:0.6; }
+.dui-reading del:hover { opacity:1; text-decoration:none; }
+
+.dui-reading em { margin-right:3px; }
+
+	/* code and pre.code */
+.dui-reading code, .dui-reading .code { color:#393; margin:0 3px; }
+
+.dui-reading h2 code,
+.dui-reading h3 code,
+.dui-reading h4 code,
+.dui-reading dl.introCode dt code { padding:3px 0.5em;
+	background-color:#efe; border:1px solid #393; border-radius:3px; }
+
+.dui-reading pre.code { margin:20px 0 20px 1em; padding:10px; background-color:#f5f5f5; border:1px solid #ccc; color:#666; line-height:1.3em; }
+.dui-reading pre.code em, .dui-reading dl.parameter dt { font-style:normal; font-weight:bold; color:#090; }
+.dui-reading pre.code strong { color:#f60; }
+
+.dui-reading pre.code:after { color:#e5e5e5; font-size:20pt; position:absolute; right:15px; }
+.dui-reading pre.code.js:after { content:'JavaScript'; }
+.dui-reading pre.code.html:after { content:'HTML'; }
+.dui-reading pre.code.css:after { content:'CSS'; }
+
+	/* table */
+.dui-reading table.data { width:100%; border-collapse: collapse;
+	border-top:2px solid #555; border-bottom:2px solid #555;
+}
+.dui-reading table.data thead { border-bottom:1px solid #555; text-align:left; }
+.dui-reading table.data td, .dui-reading table.data th { padding:2px 5px; vertical-align:top; }
+.dui-reading table.data tbody tr:hover { background-color:#f5f5f5; }
+
