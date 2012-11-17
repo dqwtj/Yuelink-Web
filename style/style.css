@@ -234,9 +234,6 @@ div, a {
 #player #prev a {
   display: block;
 }
-#player #prev a:hover {
-  background: url(icons.png) -400px -211px no-repeat;
-}
 #player #next {
   right: 0px;
   position: absolute; top:37%;
@@ -244,10 +241,6 @@ div, a {
 #player #next a {
   display: block;
 }
-#player #next a:hover {
-  background: url(icons.png) -1163px -100px no-repeat;
-}
-
 
 #wall {
 	position:fixed; top:87px; bottom:0px;
