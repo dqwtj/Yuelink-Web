@@ -83,7 +83,6 @@ var _ = {
 	    }
 } //end of _
 
-
 /* ------- YUELINK OBJECTS ------- YUELINK OBJECTS ------- YUELINK OBJECTS ------- YUELINK OBJECTS ------- YUELINK OBJECTS ------- */
 var $console, $player, $wall, $dialog;
 var $posters;
@@ -91,6 +90,8 @@ var $songInfo, $startMenu, $searchMenu, $fmMenu, $msgMenu, $userMenu;
 var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
+
+var url_prefix = "http://localhost:8080/api/";
 
 var d_user, d_node, d_songList;
 
@@ -258,6 +259,41 @@ function yuelink_initialize () {
 */	
 }
 
+function soundplayeReady(data){
+//	alert(JSON.stringify(data));
+//	alert(JSON.stringify(data.related_songs));
+	//player.append(data.related_songs);
+	if (data.related_songs.length > 0){
+		var soundManagerReadyCheck = setInterval(function(){
+			if (soundManagerReady) {
+				clearInterval(soundManagerReadyCheck);
+	
+	//			player.append([
+	//			   			{ id: 1, title: 'Viva La Vida', author: 'Coldplay', url: 'http://yuelink-music.b0.upaiyun.com/order/034724341af9772743cc123132faac31.mp3', poster: "sample/viva-la-vida.jpg", thumb: 'sample/photo-butterfly.jpg' },
+	//			   			{ id: 3, title: 'Hero', author: 'Enrique Iglesias', url: 'http://yuelink-music.b0.upaiyun.com/order/783dce11a20fb6e370be184a695a9694.mp3', poster: "sample/enrique-iglesias.jpg", thumb: 'sample/photo-nut.jpg' },
+	//			   			{ id: 5, title: 'Love Me Tender', author: 'Elvis Presly', url: 'sample/lovemetender.mp3', poster: 'sample/love_me_tender.jpg', thumb: 'sample/photo-redhat.jpg' }
+	//			   		]); 
+				player.append(data.related_songs);
+			}
+		}, 50);
+	} else {
+		alert("No songs exist.");
+	}
+}
+//load songs
+function loadsongs(nodeid){
+	
+	//var apiurl = 'http://www.yuelink.com/api/nodes/' + nodeid +'.json';
+	var apiurl = url_prefix + 'nodes/' + nodeid +'.json';
+	//alert(apiurl);
+	$.ajax({
+		type: 'GET',
+		url: apiurl,
+		dataType: 'json',
+		success:soundplayeReady
+		});
+}
+
 // isShow 是当前状态，userTrack 是用户手动操作。
 var songInfo = {
 	isShow: false,
@@ -375,6 +411,7 @@ var player = {
 			soundManager.stopAll();
 			this.duration = false;
 			$('.play').attr('class', 'pause');
+
 			soundManager.play(this.log.current, {
 				volume: this.volume,
 				whileplaying : function(){
@@ -383,19 +420,21 @@ var player = {
 						avatar.durationEstimate = this.durationEstimate;
 					}
 					if (!avatar.duration) {
-						$('#playCtrl-time .duration').text(player.getFormattedTime(this.duration));
+						$('#playCtrl-time .duration').text(player.getFormattedTime(this.durationEstimate));
 						avatar.duration = this.duration;
 					}
 					$('#playCtrl-time .position').text(player.getFormattedTime(this.position));
-					$('.prog-cover').css('left', 100*this.position/this.duration + '%');
-					$('.prog-white').css('width', 100*this.position/this.duration + '%');
+					//alert("d" + this.duration);
+					//alert("p" + this.position);
+					$('.prog-cover').css('left', 100*this.position/this.durationEstimate + '%');
+					$('.prog-white').css('width', 100*this.position/this.durationEstimate + '%');
 				},
 				whileloading: function() {
 					$('.prog-load').css('width', 100*this.bytesLoaded/this.bytesTotal + '%');
-					if(this.duration < this.durationEstimate) {
+					/*if(this.duration < this.durationEstimate) {
 						$('#playCtrl-time .duration').text(player.getFormattedTime(this.durationEstimate));
 						avatar.durationEstimate = this.durationEstimate;
-					}
+					}*/
 				},
 				onfinish : function() {
 					if (avatar.isCycle) {
@@ -482,6 +521,17 @@ var player = {
 		
 		append : function (options) {
 			for (var i=0; i<options.length; i++) {
+				//hotfix
+				options[i].id = options[i]._id;
+				options[i].url = options[i].mp3_url;
+				if (options[i].pic_b_url != ""){
+					options[i].poster = options[i].pic_b_url;
+				} else {
+					options[i].poster = "http://bizhi.zhuoku.com/bizhi2008/0606/jiewu/jiewu21.jpg";
+				}
+				options[i].title = options[i].name;
+				options[i].author = 'Simon';
+				//hotfix-end
 				this.log.upcoming.push(options[i].id);
 				soundManager.createSound({
 					id : options[i].id,
