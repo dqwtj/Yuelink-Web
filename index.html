@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="images/icons.css" />
-<title>yuelink</title>
+<title>Yuelink Player</title>
 </head>
 
 <body>
@@ -275,7 +275,7 @@
 	<p class="text"><span class="name">{{= username}}：</span>{{= content}}</p>
 </li>
 </script>
-
+<script type="text/javascript" charset="utf-8" src="js/commonFunc.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/soundmanager2-nodebug-jsmin.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/jquery.masonry.min.js"></script>
@@ -284,6 +284,21 @@
 <script type="text/javascript">
 	yuelink_initialize();
 	
+	
+	var nid = (getPar("nid"));
+	
+	var nodeid=25;
+	if (nid){
+		nodeid = nid;
+	}
+	
+	loadsongs(nodeid);
+/*  	var song_list = [
+			   			{ id: 1, title: 'Viva La Vida', author: 'Coldplay', url: 'http://yuelink-music.b0.upaiyun.com/order/034724341af9772743cc123132faac31.mp3', poster: "sample/viva-la-vida.jpg", thumb: 'sample/photo-butterfly.jpg' },
+			   			{ id: 3, title: 'Hero', author: 'Enrique Iglesias', url: 'http://yuelink-music.b0.upaiyun.com/order/783dce11a20fb6e370be184a695a9694.mp3', poster: "sample/enrique-iglesias.jpg", thumb: 'sample/photo-nut.jpg' },
+			   			{ id: 5, title: 'Love Me Tender', author: 'Elvis Presly', url: 'sample/lovemetender.mp3', poster: 'sample/love_me_tender.jpg', thumb: 'sample/photo-redhat.jpg' }
+			   		];  */
+	
 	yueConsole.showPlayer();
 	wall.loadInfo();
 	
@@ -291,11 +306,12 @@
 		if (soundManagerReady) {
 			clearInterval(soundManagerReadyCheck);
 
-			player.append([
+/* 			player.append([
 			   			{ id: 1, title: 'Viva La Vida', author: 'Coldplay', url: 'http://yuelink-music.b0.upaiyun.com/order/034724341af9772743cc123132faac31.mp3', poster: "sample/viva-la-vida.jpg", thumb: 'sample/photo-butterfly.jpg' },
 			   			{ id: 3, title: 'Hero', author: 'Enrique Iglesias', url: 'http://yuelink-music.b0.upaiyun.com/order/783dce11a20fb6e370be184a695a9694.mp3', poster: "sample/enrique-iglesias.jpg", thumb: 'sample/photo-nut.jpg' },
 			   			{ id: 5, title: 'Love Me Tender', author: 'Elvis Presly', url: 'sample/lovemetender.mp3', poster: 'sample/love_me_tender.jpg', thumb: 'sample/photo-redhat.jpg' }
-			   		]);
+			   		]); */
+			//player.append(song_list);
 		}
 	}, 50);
 </script>
