@@ -91,7 +91,7 @@ var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
 
-var url_prefix = "http://192.168.11.45/api/";
+var url_prefix = "http://localhost:8080/api/";
 
 var d_user, d_node, d_songList;
 
@@ -392,6 +392,7 @@ var player = {
 			soundManager.stopAll();
 			this.duration = false;
 			$('.play').attr('class', 'pause');
+
 			soundManager.play(this.log.current, {
 				volume: this.volume,
 				whileplaying : function(){
@@ -400,19 +401,21 @@ var player = {
 						avatar.durationEstimate = this.durationEstimate;
 					}
 					if (!avatar.duration) {
-						$('#playCtrl-time .duration').text(player.getFormattedTime(this.duration));
+						$('#playCtrl-time .duration').text(player.getFormattedTime(this.durationEstimate));
 						avatar.duration = this.duration;
 					}
 					$('#playCtrl-time .position').text(player.getFormattedTime(this.position));
-					$('.prog-cover').css('left', 100*this.position/this.duration + '%');
-					$('.prog-white').css('width', 100*this.position/this.duration + '%');
+					//alert("d" + this.duration);
+					//alert("p" + this.position);
+					$('.prog-cover').css('left', 100*this.position/this.durationEstimate + '%');
+					$('.prog-white').css('width', 100*this.position/this.durationEstimate + '%');
 				},
 				whileloading: function() {
 					$('.prog-load').css('width', 100*this.bytesLoaded/this.bytesTotal + '%');
-					if(this.duration < this.durationEstimate) {
+					/*if(this.duration < this.durationEstimate) {
 						$('#playCtrl-time .duration').text(player.getFormattedTime(this.durationEstimate));
 						avatar.durationEstimate = this.durationEstimate;
-					}
+					}*/
 				},
 				onfinish : function() {
 					if (avatar.isCycle) {
@@ -501,7 +504,7 @@ var player = {
 				if (options[i].pic_b_url != ""){
 					options[i].poster = options[i].pic_b_url;
 				} else {
-					options[i].poster = "http://t2.baidu.com/it/u=1136794805,141848358&fm=24&gp=0.jpg";
+					options[i].poster = "http://bizhi.zhuoku.com/bizhi2008/0606/jiewu/jiewu21.jpg";
 				}
 				options[i].title = options[i].name;
 				options[i].author = 'Simon';
