@@ -91,7 +91,7 @@ var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
 
-var url_prefix = "http://localhost:8080/api/";
+var url_prefix = "http://localhost/api/";
 
 var d_user, d_node, d_songList;
 
@@ -504,7 +504,8 @@ var player = {
 				if (options[i].pic_b_url != ""){
 					options[i].poster = options[i].pic_b_url;
 				} else {
-					options[i].poster = "http://bizhi.zhuoku.com/bizhi2008/0606/jiewu/jiewu21.jpg";
+					options[i].poster = "";
+					//options[i].poster = "http://bizhi.zhuoku.com/bizhi2008/0606/jiewu/jiewu21.jpg";
 				}
 				options[i].title = options[i].name;
 				options[i].author = 'Simon';
@@ -682,7 +683,7 @@ var playerPoster = {
 						width : '',
 						height : '100%',
 						left : ($(window).width() - $(window).height()*imgRatio)/2,
-						top　: 0
+						top : 0
 					})
 				}
 				else {	// tall
