@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+.s_title_bar{
+	width:50px;
+	height:220px;
+	float:left;
+	font-weight:bold;
+	text-align: left;
+	margin-left: -2px;
+}
+
+.song-title{
+	font-size:20px;
+	font-weight: bold;
+}
+
+.lscroll{
+	width: 315px;
+	height: 165px;
+	overflow: scroll;
+}
