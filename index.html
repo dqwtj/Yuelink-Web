@@ -5,7 +5,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="style/yuelinkapp.css" />
 <link rel="stylesheet" type="text/css" href="images/icons.css" />
+<link rel="stylesheet" type="text/css" href="style/jquery.scrollbars.css" />
+<script type="text/javascript" charset="utf-8" src="js/commonFunc.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
+<!-- <script type="text/javascript" charset="utf-8" src="js/soundmanager2-nodebug-jsmin.js"></script> -->
+<script type="text/javascript" charset="utf-8" src="js/soundmanager2.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.masonry.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.tmpl.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/yuelink.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.scrollbars.js"></script>
 <title>Yuelink Player</title>
 </head>
 
@@ -38,25 +48,92 @@
 			
 		</div>
 		<div id="userBox">
-			<div id="userNote">你好<a id="user">天地一沙鸥</a></div>
-			<ul id="nav">
-				<li><a id="start"></a></li>
-				<li><a id="search"></a></li>
-				<li><a id="fm"></a></li>
-				<li><a id="msg"></a></li>
-			</ul>
+			<div id="bSlogan" style="background: url(img/14.png) no-repeat;width:209px;height:38px;margin-top:10px">
+				<div id="ads" style="display:none;position:relative;width:291px; height:230px;top:-270px;left:-105px;">
+					<table>
+					 	<tr>
+					 		<td>
+					 			<div id="ad1" style="display:none;background: url(img/04.png) no-repeat;width:181px;height:111px;float:left"></div>
+					 			<div id="ad2" style="display:none;background: url(img/05.png) no-repeat;width:135px;height:111px;margin-left: 192px;"></div>
+					 		</td>
+					 	</tr>
+					 	<tr>
+					 		<td>
+					 		<div id="ad3" style="display:none;background: url(img/06.png) no-repeat;width:291px;height:111px;margin-top:5px;"></div>
+					 		</td>				 		
+					 	</tr>
+					</table>
+				</div>
+			</div>
+			<script>
+				$("#bSlogan").mouseover(function(){
+					$("#ads").show();
+					showin();
+					setTimeout('showout()',10000);
+				});
+			  	function hideblock(id, time){
+			  		$("#"+id).fadeOut(time);
+			  	}
+			  	function showblock(id, time){
+			  		$("#"+id).fadeIn(time);
+			  	}
+			  	function showin(){
+				  	setTimeout('showblock("ad1", 1000)',0);
+				  	setTimeout('showblock("ad2", 1000)',1000);
+				  	setTimeout('showblock("ad3", 1000)',2000);
+			  	}
+			  	function showout(){
+				  	setTimeout('hideblock("ad3", 1000)',0);
+				  	setTimeout('hideblock("ad2", 1000)',1000);
+				  	setTimeout('hideblock("ad1", 1000)',2000);
+			  	}
+			</script>
 		</div>
 	</div>
 </div>
 
 <div id="player">
 	<div id="showcase">
-		<div id="sinfo">
-			<div id="info" class="gray-square">
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<div id="info" class="gray-square" style="color:#EFEFEF;overflow:hidden;margin-right:3px;">
+					<div style="width:100%;height:10px"></div>
+					<div class="s_title_bar">歌<br>曲</div>
+					<div style="width:200px;text-align:left;">
+						<div class="song-title"></div>
+						<div id="song-role" style="font-size:12px;"></div>
+						<div style="width:100%;height:10px"></div>
+						<div id="song-info" style="font-size:12px;"></div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div id="lyrics" class="gray-rectangle" style="color:#EFEFEF;overflow:hidden;">
+					<div style="width:100%;height:10px"></div>
+					<div class="s_title_bar">歌<br>词</div>
+					<div style="width:380px;text-align:left;padding-left:80px;">
+						<div class="song-title" style="font-size:16px"></div>
+						<div style="width:100%;height:15px"></div>
+						<div id="song-lyric" style="font-size:14px;line-height:24px;"  class="lscroll"></div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		</table>
+		<!--  <div id="sinfo">
+
+			<div id="info" class="gray-square" style="color:#EFEFEF;overflow:hidden">
+				<div style="width:50px;height:220px;float:left">歌<br>曲</div>
+				<div style="width:160px">
+					<div id="song-title"></div>
+					<div id="song-role"></div>
+					<div id="song-info"></div>
+				</div>
 			</div>
 			<div id="lyrics" class="gray-rectangle">
 			</div>
-		</div>
+		</div>-->
 		<a id="list">
 			<div class='list-gray'></div>
 		</a>
@@ -275,15 +352,10 @@
 	<p class="text"><span class="name">{{= username}}：</span>{{= content}}</p>
 </li>
 </script>
-<script type="text/javascript" charset="utf-8" src="js/commonFunc.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/soundmanager2-nodebug-jsmin.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery.masonry.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery.tmpl.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/yuelink.js"></script>
+
 <script type="text/javascript">
 	yuelink_initialize();
-	
+
 	
 	var nid = (getPar("nid"));
 	

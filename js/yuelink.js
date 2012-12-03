@@ -91,7 +91,8 @@ var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
 
-var url_prefix = "http://localhost:8080/api/";
+var url_domain = "http://localhost/";
+var url_prefix = url_domain + "api/";
 
 var d_user, d_node, d_songList;
 
@@ -259,20 +260,12 @@ function yuelink_initialize () {
 */	
 }
 
-function soundplayeReady(data){
-//	alert(JSON.stringify(data));
-//	alert(JSON.stringify(data.related_songs));
-	//player.append(data.related_songs);
+function soundplayeReady(data){;
 	if (data.related_songs.length > 0){
 		var soundManagerReadyCheck = setInterval(function(){
 			if (soundManagerReady) {
 				clearInterval(soundManagerReadyCheck);
 	
-	//			player.append([
-	//			   			{ id: 1, title: 'Viva La Vida', author: 'Coldplay', url: 'http://yuelink-music.b0.upaiyun.com/order/034724341af9772743cc123132faac31.mp3', poster: "sample/viva-la-vida.jpg", thumb: 'sample/photo-butterfly.jpg' },
-	//			   			{ id: 3, title: 'Hero', author: 'Enrique Iglesias', url: 'http://yuelink-music.b0.upaiyun.com/order/783dce11a20fb6e370be184a695a9694.mp3', poster: "sample/enrique-iglesias.jpg", thumb: 'sample/photo-nut.jpg' },
-	//			   			{ id: 5, title: 'Love Me Tender', author: 'Elvis Presly', url: 'sample/lovemetender.mp3', poster: 'sample/love_me_tender.jpg', thumb: 'sample/photo-redhat.jpg' }
-	//			   		]); 
 				player.append(data.related_songs);
 			}
 		}, 50);
@@ -285,13 +278,50 @@ function loadsongs(nodeid){
 	
 	//var apiurl = 'http://www.yuelink.com/api/nodes/' + nodeid +'.json';
 	var apiurl = url_prefix + 'nodes/' + nodeid +'.json';
-	//alert(apiurl);
+
 	$.ajax({
 		type: 'GET',
 		url: apiurl,
 		dataType: 'json',
 		success:soundplayeReady
 		});
+}
+
+function songInfoReady(song, obj){
+	obj.info = song;
+	var roleinfo = "";
+	for (var i = 0; i < song.user_roles.length; i++){
+		if (song.user_roles[i].name == "演唱"){
+			obj.author = song.user_roles[i].node_name;
+			//sample
+			obj.info.summary = "<span style='font-weight:bold;margin-right:3px;'>歌曲介绍 </span>歌曲信息歌曲信息歌曲信息歌曲信息歌曲信息<br>";
+			obj.info.lyric = "十里洋场 成就一生功业<br>潮起潮落 里里外外都体面<br>你陪了我多少年<br>十里洋场 成就一生功业<br>潮起潮落 里里外外都体面<br>你陪了我多少年<br>十里洋场 成就一生功业<br>潮起潮落 里里外外都体面<br>你陪了我多少年<br>";
+			//sample-end
+			$('#playCtrl h2').text(obj.name + " - "+obj.author);
+
+		}
+		if (song.user_roles[i].name != ""){
+			roleinfo = song.user_roles[i].name + " : " + song.user_roles[i].node_name + "<br>";
+		}
+	}
+	$('.song-title').text(obj.info.name);
+	$('#song-role').html(roleinfo);
+	$('#song-info').html(obj.info.summary);
+	$('#song-lyric').html(obj.info.lyric);
+	$('.lscroll').scrollbars();
+}
+
+function loadSongInfo(songid, songObj){
+	var apiurl = url_prefix + 'songs/' + songid +'.json';
+
+	$.ajax({
+		type: 'GET',
+		url: apiurl,
+		dataType: 'json',
+		success:function(data){
+			songInfoReady(data, songObj);
+		}
+		});	
 }
 
 // isShow 是当前状态，userTrack 是用户手动操作。
@@ -357,6 +387,7 @@ var yueConsole = {
 			
 			return this;
 		},
+		
 		switchView : function (option, para) {
 			var view;
 			if (option && typeof(option)=='string') {
@@ -382,6 +413,7 @@ var yueConsole = {
 			
 			return this;
 		},
+		
 		getTopPos : function () {
 			return $(window).height() - this.settings.consoleHeight;
 		},
@@ -411,7 +443,8 @@ var player = {
 			soundManager.stopAll();
 			this.duration = false;
 			$('.play').attr('class', 'pause');
-
+			id = this.log.current;
+			if (!this.rawData[id].info) loadSongInfo(id, this.rawData[id]);
 			soundManager.play(this.log.current, {
 				volume: this.volume,
 				whileplaying : function(){
@@ -494,6 +527,7 @@ var player = {
 				playerPoster.prev();
 				$('#playCtrl-thumb').attr('src', this.rawData[id].thumb);
 				$('#playCtrl h2').text('').append($('#playCtrl-title-template').render(this.rawData[id]));
+				
 			}
 			return this;
 		},
@@ -527,10 +561,10 @@ var player = {
 				if (options[i].pic_b_url != ""){
 					options[i].poster = options[i].pic_b_url;
 				} else {
-					options[i].poster = "http://bizhi.zhuoku.com/bizhi2008/0606/jiewu/jiewu21.jpg";
+					options[i].poster = url_domain + "yuelink/images/sample.jpg";
 				}
 				options[i].title = options[i].name;
-				options[i].author = 'Simon';
+				options[i].author = 'Default Singer';
 				//hotfix-end
 				this.log.upcoming.push(options[i].id);
 				soundManager.createSound({
@@ -705,7 +739,7 @@ var playerPoster = {
 						width : '',
 						height : '100%',
 						left : ($(window).width() - $(window).height()*imgRatio)/2,
-						top　: 0
+						top : 0
 					})
 				}
 				else {	// tall
