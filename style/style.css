@@ -89,7 +89,7 @@ div, a {
 	filter: alpha(opacity=95);
 }
 
-#yuelink { float:left; width:100px; height:45px; margin:18px 0 0 150px;
+#yuelink { float:left; width:120px; height:45px; margin:18px 0 0 150px;
 	background:url(images/yuelink-100.png) no-repeat;
 }
 
