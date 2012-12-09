@@ -91,7 +91,7 @@ var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
 
-var url_domain = "http://localhost:8080/";
+var url_domain = "http://localhost/";
 var url_prefix = url_domain + "api/";
 
 var d_user, d_node, d_songList;
