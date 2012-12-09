@@ -1,20 +1,38 @@
 @CHARSET "UTF-8";
-.s_title_bar{
-	width:50px;
-	height:220px;
-	float:left;
-	font-weight:bold;
+
+.s_title_bar {
+	width: 50px;
+	height: 220px;
+	float: left;
+	font-weight: bold;
 	text-align: left;
 	margin-left: -2px;
 }
 
-.song-title{
-	font-size:20px;
+.song-title {
+	font-size: 20px;
 	font-weight: bold;
 }
 
-.lscroll{
-	width: 315px;
+.channel-title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.lscroll {
+	width: 345px;
 	height: 165px;
 	overflow: scroll;
+}
+
+div.play:hover {
+	width: 60px;
+	height: 60px;
+	background: url(/yuelink/images/icons/play-light.png) no-repeat;
+}
+
+div.pause:hover {
+	width: 60px;
+	height: 60px;
+	background: url(/yuelink/images/icons/pause-light.png) no-repeat;
 }

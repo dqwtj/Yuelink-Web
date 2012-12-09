@@ -48,7 +48,7 @@
 			
 		</div>
 		<div id="userBox">
-			<div id="bSlogan" style="background: url(img/14.png) no-repeat;width:209px;height:38px;margin-top:10px">
+			<div id="bSlogan">
 				<div id="ads" style="display:none;position:relative;width:291px; height:230px;top:-270px;left:-105px;">
 					<table>
 					 	<tr>
@@ -99,23 +99,20 @@
 			<td>
 				<div id="info" class="gray-square" style="color:#EFEFEF;overflow:hidden;margin-right:3px;">
 					<div style="width:100%;height:10px"></div>
-					<div class="s_title_bar">歌<br>曲</div>
-					<div style="width:200px;text-align:left;">
-						<div class="song-title"></div>
-						<div id="song-role" style="font-size:12px;"></div>
+					<div style="width:150px;text-align:left;padding-left:50px;padding-right:10px">
+						<div class="channel-title"></div>
 						<div style="width:100%;height:10px"></div>
-						<div id="song-info" style="font-size:12px;"></div>
+						<div id="channel-summary" style="font-size:12px;"></div>
 					</div>
 				</div>
 			</td>
 			<td>
-				<div id="lyrics" class="gray-rectangle" style="color:#EFEFEF;overflow:hidden;">
+				<div id="lyrsum" class="gray-rectangle" style="color:#EFEFEF;overflow:hidden;">
 					<div style="width:100%;height:10px"></div>
-					<div class="s_title_bar">歌<br>词</div>
-					<div style="width:380px;text-align:left;padding-left:80px;">
+					<div style="width:380px;text-align:left;padding-left:50px;">
 						<div class="song-title" style="font-size:16px"></div>
 						<div style="width:100%;height:15px"></div>
-						<div id="song-lyric" style="font-size:14px;line-height:24px;"  class="lscroll"></div>
+						<div id="lyric-sum" style="font-size:14px;line-height:24px;"  class="lscroll"></div>
 					</div>
 				</div>
 			</td>
@@ -359,7 +356,7 @@
 	
 	var nid = (getPar("nid"));
 	
-	var nodeid=25;
+	var nodeid=84;
 	if (nid){
 		nodeid = nid;
 	}

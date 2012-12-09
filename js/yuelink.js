@@ -91,7 +91,7 @@ var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
 
-var url_domain = "http://localhost/";
+var url_domain = "http://localhost:8080/";
 var url_prefix = url_domain + "api/";
 
 var d_user, d_node, d_songList;
@@ -181,11 +181,31 @@ function yuelink_initialize () {
 	$('#star').mouseenter(function() {
 		$('div', this).toggleClass('star-blue star-gray');
 	}).mouseleave(function() {
-		$('div', this).toggleClass('star-blue star-gray');
+		if (songInfo.isShow) {
+			$('div', this).attr('class', 'star-blue')
+		} else {
+			$('div', this).attr('class', 'star-gray')
+		}
 	});
 	$('#list').click(function() {
 		songInfo.isManual = true;
-		songInfo.toggleLyrics();
+		if (!songInfo.isShow || player.isSummary == true){
+			songInfo.toggleLyrics();
+		}
+		if (songInfo.isShow && player.isSummary == false){
+			$('div', '#star').attr('class', 'star-gray');
+		}
+		player.setSummary(songInfo.song.info, true);
+	});
+	$('#star').click(function() {
+		songInfo.isManual = true;
+		if (!songInfo.isShow || player.isSummary == false){
+			songInfo.toggleLyrics();
+		}
+		if (songInfo.isShow && player.isSummary == true){
+			$('div', '#list').attr('class', 'list-gray');
+		}
+		player.setSummary(songInfo.song.info, false);
 	});
 	var playerPosterImgZoom;
 	$('#player #posters img').live('contextmenu mousedown', function(event){
@@ -242,6 +262,8 @@ function yuelink_initialize () {
 }
 
 function soundplayeReady(data){;
+	$(".channel-title").text(data.name);
+	$("#channel-summary").text((data.summary?"频道介绍: " + data.summary:"暂无介绍"));
 	if (data.related_songs.length > 0){
 		var soundManagerReadyCheck = setInterval(function(){
 			if (soundManagerReady) {
@@ -270,26 +292,26 @@ function loadsongs(nodeid){
 
 function songInfoReady(song, obj){
 	obj.info = song;
+	songInfo.song = obj;
 	var roleinfo = "";
 	for (var i = 0; i < song.user_roles.length; i++){
 		if (song.user_roles[i].name == "演唱"){
 			obj.author = song.user_roles[i].node_name;
-			//sample
-			obj.info.summary = "<span style='font-weight:bold;margin-right:3px;'>歌曲介绍 </span>歌曲信息歌曲信息歌曲信息歌曲信息歌曲信息<br>";
-			obj.info.lyric = "十里洋场 成就一生功业<br>潮起潮落 里里外外都体面<br>你陪了我多少年<br>十里洋场 成就一生功业<br>潮起潮落 里里外外都体面<br>你陪了我多少年<br>十里洋场 成就一生功业<br>潮起潮落 里里外外都体面<br>你陪了我多少年<br>";
-			//sample-end
 			$('#playCtrl h2').text(obj.name + " - "+obj.author);
 
 		}
 		if (song.user_roles[i].name != ""){
-			roleinfo = song.user_roles[i].name + " : " + song.user_roles[i].node_name + "<br>";
+			roleinfo += song.user_roles[i].name + " : " + song.user_roles[i].node_name + "<br>";
 		}
 	}
+	obj.info.roleinfo = roleinfo;
+	obj.info.lyrics = obj.info.lyrics.replaceAll("\r\n", "<br>");
+	obj.info.summary = obj.info.summary.replaceAll("\r\n", "<br>");
 	$('.song-title').text(obj.info.name);
-	$('#song-role').html(roleinfo);
-	$('#song-info').html(obj.info.summary);
-	$('#song-lyric').html(obj.info.lyric);
-	$('.lscroll').scrollbars();
+	player.setSummary(obj.info);
+	
+	//alert($('#playCtrl-button').style.background);
+	$('#playCtrl-button').css("background","url("+obj.info.pic_button_url+") 4px 4px no-repeat");
 }
 
 function loadSongInfo(songid, songObj){
@@ -309,6 +331,7 @@ function loadSongInfo(songid, songObj){
 var songInfo = {
 	isShow: false,
 	isManual: false,
+	song : new Object(),
 	showLyrics: function() {
 		if(!this.isShow) {
 			$('#showcase').animate({
@@ -316,7 +339,10 @@ var songInfo = {
 			},{
 				duration: 500, 
 				complete: function(){
-					$('div', "#list").attr('class', 'list-green');
+					if (player.isSummary)
+						$('div', "#list").attr('class', 'list-green');
+					else
+						$('div', "#star").attr('class', 'star-blue');
 				}
 			});
 			this.isShow = !this.isShow;
@@ -409,6 +435,7 @@ var player = {
 		isPaused : true,
 		isCycle : false,
 		volume: 100,
+		isSummary: true,
 		
 		log : {
 			history : new Array(),
@@ -416,6 +443,19 @@ var player = {
 			current: null
 		},
 		rawData : {},
+		
+		
+		setSummary : function(songinfo, isSummary){
+			if (isSummary != null) player.isSummary = isSummary;
+			if (player.isSummary){
+				$('#lyrsum').css("background", "url(/yuelink/images/icons/detail-title.png) no-repeat");
+				$('#lyric-sum').html(songinfo.roleinfo + "<br>歌曲介绍:<br>" + songinfo.summary);
+			} else {
+				$('#lyrsum').css("background", "url(/yuelink/images/icons/lyrics-title.png) no-repeat");
+				$('#lyric-sum').html(songinfo.lyrics);
+			}
+			$('.lscroll').scrollbars();			
+		},
 		
 		play : function () {
 			var avatar = this;
@@ -425,6 +465,7 @@ var player = {
 			this.duration = false;
 			$('.play').attr('class', 'pause');
 			id = this.log.current;
+			songInfo.song =this.rawData[id].info;
 			if (!this.rawData[id].info) loadSongInfo(id, this.rawData[id]);
 			soundManager.play(this.log.current, {
 				volume: this.volume,
@@ -504,7 +545,6 @@ var player = {
 				playerPoster.prev();
 				$('#playCtrl-thumb').attr('src', this.rawData[id].thumb);
 				$('#playCtrl h2').text('').append($('#playCtrl-title-template').render(this.rawData[id]));
-				
 			}
 			return this;
 		},
@@ -535,8 +575,8 @@ var player = {
 				//hotfix
 				options[i].id = options[i]._id;
 				options[i].url = options[i].mp3_url;
-				if (options[i].pic_b_url != ""){
-					options[i].poster = options[i].pic_b_url;
+				if (options[i].pic_bkg_url != ""){
+					options[i].poster = options[i].pic_bkg_url;
 				} else {
 					options[i].poster = url_domain + "yuelink/images/sample.jpg";
 				}
