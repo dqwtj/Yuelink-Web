@@ -36,3 +36,22 @@ div.pause:hover {
 	height: 60px;
 	background: url(../images/icons/pause-light.png) no-repeat;
 }
+
+#ad1{
+	display:none;background: url(../img/01.png) no-repeat;width:181px;height:111px;float:left
+}
+#ad1:hover{
+	background: url(../img/04.png) no-repeat;
+}
+#ad2{
+	display:none;background: url(../img/02.png) no-repeat;width:135px;height:111px;margin-left: 192px;
+}
+#ad2:hover{
+	background: url(../img/05.png) no-repeat;
+}
+#ad3{
+	display:none;background: url(../img/03.png) no-repeat;width:291px;height:111px;margin-top:5px;
+}
+#ad3:hover{
+	background: url(../img/06.png) no-repeat;
+}

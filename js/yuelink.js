@@ -91,8 +91,8 @@ var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
 
-var url_domain = "http://www.yuelink.com/";
-//var url_domain = "http://localhost:8080/";
+//var url_domain = "http://www.yuelink.com/";
+var url_domain = "http://localhost:8080/";
 var url_prefix = url_domain + "api/";
 
 var d_user, d_node, d_songList;
@@ -306,8 +306,14 @@ function songInfoReady(song, obj){
 		}
 	}
 	obj.info.roleinfo = roleinfo;
-	obj.info.lyrics = obj.info.lyrics.replaceAll("\r\n", "<br>");
-	obj.info.summary = obj.info.summary.replaceAll("\r\n", "<br>");
+	if (obj.info.lyrics)
+		obj.info.lyrics = obj.info.lyrics.replaceAll("\r\n", "<br>");
+	else
+		obj.info.lyrics = "暂无歌词";
+	if (obj.info.summary)
+		obj.info.summary = obj.info.summary.replaceAll("\r\n", "<br>");
+	else
+		obj.info.lyrics = "暂无介绍";
 	$('.song-title').text(obj.info.name);
 	player.setSummary(obj.info);
 	
@@ -455,10 +461,17 @@ var player = {
 				$('#lyrsum').css("background", "url(images/icons/lyrics-title.png) no-repeat");
 				$('#lyric-sum').html(songinfo.lyrics);
 			}
+			$('.lscroll').attr('class', 'lscroll');
 			$('.lscroll').scrollbars();			
 		},
 		
 		play : function () {
+			if (this.log.history.length == 1){
+				$('#prev').hide();
+			}
+			if (this.log.upcoming.length == 1){
+				$('#next').hide();
+			}
 			var avatar = this;
 			var timeOfSInfoShow, timeOfSInfoHide;
 			
@@ -466,7 +479,8 @@ var player = {
 			this.duration = false;
 			$('.play').attr('class', 'pause');
 			id = this.log.current;
-			songInfo.song =this.rawData[id].info;
+			if (this.rawData[id])
+				songInfo.song =this.rawData[id].info;
 			if (!this.rawData[id].info) loadSongInfo(id, this.rawData[id]);
 			soundManager.play(this.log.current, {
 				volume: this.volume,
@@ -533,6 +547,7 @@ var player = {
 		
 		prev : function () {
 			if (this.log.history.length>0) {
+				$('#next').show();
 				var id = this.log.history.pop();
 				
 				this.log.upcoming.splice(0,0, this.log.current);
@@ -551,6 +566,7 @@ var player = {
 		},
 		next : function (para) {
 			if (this.log.upcoming.length>0) {
+				$('#prev').show();
 				var id = this.log.upcoming.splice(0,1)[0];
 				
 				this.log.history.push(this.log.current);
@@ -567,6 +583,8 @@ var player = {
 				}
 				$('#playCtrl-thumb').attr('src', this.rawData[id].thumb);
 				$('#playCtrl h2').text('').append($('#playCtrl-title-template').render(this.rawData[id]));
+			} else {
+				
 			}
 			return this;
 		},

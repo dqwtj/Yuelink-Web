@@ -53,24 +53,37 @@
 					<table>
 					 	<tr>
 					 		<td>
-					 			<div id="ad1" style="display:none;background: url(img/04.png) no-repeat;width:181px;height:111px;float:left"></div>
-					 			<div id="ad2" style="display:none;background: url(img/05.png) no-repeat;width:135px;height:111px;margin-left: 192px;"></div>
+					 			<div id="ad1"></div>
+					 			<div id="ad2"></div>
 					 		</td>
 					 	</tr>
 					 	<tr>
 					 		<td>
-					 		<div id="ad3" style="display:none;background: url(img/06.png) no-repeat;width:291px;height:111px;margin-top:5px;"></div>
+					 		<div id="ad3"></div>
 					 		</td>				 		
 					 	</tr>
 					</table>
 				</div>
 			</div>
 			<script>
+				var timmer = 0;
+				var isOut = true;
 				$("#bSlogan").mouseover(function(){
-					$("#ads").show();
-					showin();
-					setTimeout('showout()',10000);
+					if (timmer == 0){
+						$("#ads").show();
+						showin();
+					}
+					timmer = 6000;
 				});
+				
+				setInterval(function(){
+					if (timmer > 0)
+						timmer = timmer - 1000;
+					else if (!isOut){
+						showout();
+						isOut = true;
+					}
+				},1000);
 			  	function hideblock(id, time){
 			  		$("#"+id).fadeOut(time);
 			  	}
@@ -78,14 +91,20 @@
 			  		$("#"+id).fadeIn(time);
 			  	}
 			  	function showin(){
-				  	setTimeout('showblock("ad1", 1000)',0);
-				  	setTimeout('showblock("ad2", 1000)',1000);
-				  	setTimeout('showblock("ad3", 1000)',2000);
+			  		isOut = false;
+				  	setTimeout('showblock("ad1", 800)',0);
+				  	setTimeout('showblock("ad2", 800)',500);
+				  	setTimeout('showblock("ad3", 800)',1000);
+			  	}
+			  	function checkshowout(){
+			  		if (timmer == 0) showout();
 			  	}
 			  	function showout(){
-				  	setTimeout('hideblock("ad3", 1000)',0);
-				  	setTimeout('hideblock("ad2", 1000)',1000);
-				  	setTimeout('hideblock("ad1", 1000)',2000);
+				  	setTimeout('hideblock("ad3", 800)',0);
+				  	setTimeout('hideblock("ad2", 800)',500);
+				  	setTimeout('hideblock("ad1", 800)',1000);
+				  	setTimeout('hideblock($("#ads").hide())',1800);
+				  	
 			  	}
 			</script>
 		</div>
