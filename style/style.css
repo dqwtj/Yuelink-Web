@@ -98,11 +98,11 @@ div, a {
 }
 
 #bSlogan{
-	background: url(/yuelink/img/15.png) no-repeat;width:209px;height:38px;margin-top:10px;
+	background: url(../img/15.png) no-repeat;width:209px;height:38px;margin-top:10px;
 }
 
 #bSlogan:hover{
-	background: url(/yuelink/img/14.png) no-repeat;width:209px;height:38px;margin-top:10px;
+	background: url(../img/14.png) no-repeat;width:209px;height:38px;margin-top:10px;
 }
 
 #console #playCtrl, #console #userBox {
@@ -248,10 +248,10 @@ div, a {
   display: block;
 }
 #player #prev a:hover {
-  background: url(/yuelink/images/icons/prev-hover.png) no-repeat;
+  background: url(../images/icons/prev-hover.png) no-repeat;
 }
 #player #prev a:active {
-  background: url(/yuelink/images/icons/prev-focus.png) no-repeat;
+  background: url(../images/icons/prev-focus.png) no-repeat;
 }
 #player #next {
   right: 0px;
@@ -262,11 +262,11 @@ div, a {
 }
 
 #player #next a:hover {
-  background: url(/yuelink/images/icons/next-hover.png) no-repeat;
+  background: url(../images/icons/next-hover.png) no-repeat;
 }
 
 #player #next a:active {
-  background: url(/yuelink/images/icons/next-focus.png) no-repeat;
+  background: url(../images/icons/next-focus.png) no-repeat;
 }
 
 

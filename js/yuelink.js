@@ -91,7 +91,8 @@ var $wallWrapper, $nodeInfo;
 var $sDetail, $review, $newSong, $activity, $userInfo;
 var $register;
 
-var url_domain = "http://localhost/";
+var url_domain = "http://www.yuelink.com/";
+//var url_domain = "http://localhost:8080/";
 var url_prefix = url_domain + "api/";
 
 var d_user, d_node, d_songList;
@@ -448,10 +449,10 @@ var player = {
 		setSummary : function(songinfo, isSummary){
 			if (isSummary != null) player.isSummary = isSummary;
 			if (player.isSummary){
-				$('#lyrsum').css("background", "url(/yuelink/images/icons/detail-title.png) no-repeat");
+				$('#lyrsum').css("background", "url(images/icons/detail-title.png) no-repeat");
 				$('#lyric-sum').html(songinfo.roleinfo + "<br>歌曲介绍:<br>" + songinfo.summary);
 			} else {
-				$('#lyrsum').css("background", "url(/yuelink/images/icons/lyrics-title.png) no-repeat");
+				$('#lyrsum').css("background", "url(images/icons/lyrics-title.png) no-repeat");
 				$('#lyric-sum').html(songinfo.lyrics);
 			}
 			$('.lscroll').scrollbars();			

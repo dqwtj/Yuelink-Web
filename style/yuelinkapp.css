@@ -20,7 +20,7 @@
 }
 
 .lscroll {
-	width: 345px;
+	width: 340px;
 	height: 165px;
 	overflow: scroll;
 }
@@ -28,11 +28,11 @@
 div.play:hover {
 	width: 60px;
 	height: 60px;
-	background: url(/yuelink/images/icons/play-light.png) no-repeat;
+	background: url(../images/icons/play-light.png) no-repeat;
 }
 
 div.pause:hover {
 	width: 60px;
 	height: 60px;
-	background: url(/yuelink/images/icons/pause-light.png) no-repeat;
+	background: url(../images/icons/pause-light.png) no-repeat;
 }

@@ -43,13 +43,13 @@
 
 */
 div.strip-blank { width: 1280px; height: 100px; background: url(icons.png) 0px 0px no-repeat; }
-div.gray-rectangle { width: 400px; height: 220px; background: url(/yuelink/images/icons/detail-title.png) no-repeat; }
+div.gray-rectangle { width: 400px; height: 220px; background: url(icons/detail-title.png) no-repeat; }
 div.prog-white { width: 385px; height: 4px; background: url(icons.png) -400px -100px no-repeat; }
 div.prog-blank { width: 385px; height: 4px; background: url(icons.png) -785px -100px no-repeat; }
 div.prog-load { width: 385px; height: 4px; background: url(icons.png) -400px -104px no-repeat; }
 div.o2-plan-focus { width: 291px; height: 111px; background: url(icons.png) -400px -108px no-repeat; }
 div.o2-plan { width: 291px; height: 111px; background: url(icons.png) -691px -108px no-repeat; }
-div.gray-square { width: 220px; height: 220px; background: url(/yuelink/images/icons/channel-title.png) no-repeat; }
+div.gray-square { width: 220px; height: 220px; background: url(icons/channel-title.png) no-repeat; }
 div.o2-coop { width: 181px; height: 111px; background: url(icons.png) -982px -108px no-repeat; }
 div.o2-coop-focus { width: 181px; height: 111px; background: url(icons.png) -220px -320px no-repeat; }
 div.o2-record { width: 135px; height: 111px; background: url(icons.png) -401px -320px no-repeat; }
