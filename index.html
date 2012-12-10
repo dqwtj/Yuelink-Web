@@ -158,8 +158,8 @@
 		</a>
 	</div>
 	<div id="posterHolder"><ul id="posters"></ul></div>
-	<div id="prev"><a class='prev'></a></div>
-	<div id="next"><a class='next'></a></div>	
+	<div id="prev" class='prev'></div>
+	<div id="next" class='next'></div>	
 </div>
 
 <div id="wall" class="wall">
@@ -389,6 +389,11 @@
 	
 	yueConsole.showPlayer();
 	wall.loadInfo();
+	$.ajax({
+	type: 'GET',
+	url: 'http://www.yuelink.xxx/api/nodes/25.json?jsoncallback=?',
+	dataType: 'json'
+	});
 	
 	var soundManagerReadyCheck = setInterval(function(){
 		if (soundManagerReady) {

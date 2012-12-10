@@ -167,6 +167,25 @@ function yuelink_initialize () {
 	$('#player #next').click(function () {
 		player.next();
 	});
+	$('#player #prev').hover(function() {
+		$(this).toggleClass('prev prev-focus-hv');
+	});
+	$('#player #next').hover(function() {
+		$(this).toggleClass('next next-focus-hv');
+	});
+	$('#playCtrl-button').mouseenter(function() {
+		if (player.isPaused) {
+			$('div', '#playCtrl-button').attr('class', 'play-hv');
+		} else {
+			$('div', '#playCtrl-button').attr('class', 'pause-hv');
+		}
+	}).mouseout(function() {
+		if (player.isPaused) {
+			$('div', '#playCtrl-button').attr('class', 'play');
+		} else {
+			$('div', '#playCtrl-button').attr('class', 'pause');
+		}
+	});
 	$('#playCtrl-volume').click(function(event) {
 		player.changeVolume(event);
 	});
@@ -536,7 +555,11 @@ var player = {
 		togglePause : function () {
 			soundManager.togglePause(this.log.current);
 			this.isPaused = !this.isPaused;
-			$('div', '#playCtrl-button').toggleClass('play pause');
+			if (this.isPaused) {
+				$('div', '#playCtrl-button').attr('class', 'play-hv');
+			} else {
+				$('div', '#playCtrl-button').attr('class', 'pause-hv');
+			}
 			return this.isPaused;
 		},
 		toggleCycle : function () {

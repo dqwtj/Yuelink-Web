@@ -2,40 +2,46 @@
 
         Creating a sprite from following images:
         
-        ./icons/strip-blank.png (1280x100)
-        ./icons/gray-rectangle.png (400x220)
-        ./icons/prog-white.png (385x4)
-        ./icons/prog-blank.png (385x4)
-        ./icons/prog-load.png (385x4)
-        ./icons/o2-plan-focus.png (291x111)
-        ./icons/o2-plan.png (291x111)
-        ./icons/gray-square.png (220x220)
-        ./icons/o2-coop.png (181x111)
-        ./icons/o2-coop-focus.png (181x111)
-        ./icons/o2-record.png (135x111)
-        ./icons/o2-record-focus.png (135x111)
-        ./icons/prev-focus.png (55x109)
-        ./icons/next-focus.png (55x109)
-        ./icons/next.png (55x109)
-        ./icons/prev.png (55x109)
-        ./icons/pause.png (60x60)
-        ./icons/play.png (60x60)
-        ./icons/sqare-gray.png (60x60)
-        ./icons/shadow.png (42x42)
-        ./icons/list-gray.png (40x41)
-        ./icons/star-gray.png (40x41)
-        ./icons/list-green.png (40x40)
-        ./icons/star-blue.png (40x40)
-        ./icons/volumn-white.png (25x9)
-        ./icons/volumn.png (25x9)
-        ./icons/cycle.png (18x16)
-        ./icons/uncycle.png (18x16)
-        ./icons/prog-cover.png (6x12)
-        ./icons/speaker-white.png (8x10)
+        icons/strip-blank.png (1280x100)
+        icons/gray-rectangle.png (400x220)
+        icons/prog-white.png (385x4)
+        icons/prog-blank.png (385x4)
+        icons/prog-load.png (385x4)
+        icons/o2-plan-focus.png (291x111)
+        icons/o2-plan.png (291x111)
+        icons/gray-square.png (220x220)
+        icons/o2-coop-focus.png (181x111)
+        icons/o2-coop.png (181x111)
+        icons/o2-record-focus.png (135x111)
+        icons/o2-record.png (135x111)
+        icons/next-hv.png (55x109)
+        icons/next-focus-hv.png (55x109)
+        icons/next-focus.png (55x109)
+        icons/prev.png (55x109)
+        icons/prev-hv.png (55x109)
+        icons/prev-focus.png (55x109)
+        icons/next.png (55x109)
+        icons/prev-focus-hv.png (55x109)
+        icons/sqare-gray.png (60x60)
+        icons/pause.png (60x60)
+        icons/play-hv.png (60x60)
+        icons/play.png (60x60)
+        icons/pause-hv.png (60x60)
+        icons/shadow.png (42x42)
+        icons/star-blue.png (40x41)
+        icons/star-gray.png (40x41)
+        icons/list-gray.png (40x41)
+        icons/list-green.png (40x41)
+        icons/volumn-white.png (25x9)
+        icons/volumn.png (25x9)
+        icons/cycle.png (18x16)
+        icons/uncycle.png (18x16)
+        icons/prog-cover.png (6x12)
+        icons/speaker-white.png (8x10)
 
         Output files:
-          ./icons.png
-          ./icons.css
+          icons.png
+          icons.css
 
         Output size:
           1280x540
@@ -71,4 +77,4 @@ div.volumn { width: 25px; height: 9px; background: url(icons.png) -807px -219px 
 div.cycle { width: 18px; height: 16px; background: url(icons.png) -782px -228px no-repeat; }
 div.uncycle { width: 18px; height: 16px; background: url(icons.png) -800px -228px no-repeat; }
 div.prog-cover { width: 6px; height: 12px; background: url(icons.png) -1273px -108px no-repeat; }
-div.speaker-white { width: 8px; height: 10px; background: url(icons.png) -818px -228px no-repeat; }
+div.speaker-white { width: 8px; height: 10px; background: url(icons.png) -938px -228px no-repeat; }

@@ -253,13 +253,6 @@ div, a {
 #player #prev a:active {
   background: url(../images/icons/prev-focus.png) no-repeat;
 }
-#player #next {
-  right: 0px;
-  position: absolute; top:37%;
-}
-#player #next a {
-  display: block;
-}
 
 #player #next a:hover {
   background: url(../images/icons/next-hover.png) no-repeat;
@@ -268,7 +261,6 @@ div, a {
 #player #next a:active {
   background: url(../images/icons/next-focus.png) no-repeat;
 }
-
 
 #wall {
 	position:fixed; top:87px; bottom:0px;
